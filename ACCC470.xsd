@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="ACCC470"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.cip-bancos.org.br/ARQ/ACCC470.xsd"
+           xmlns="http://www.cip-bancos.org.br/ARQ/ACCC470.xsd"
+           xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
+           elementFormDefault="qualified"
+           version="8.5">
+
+    <xs:include schemaLocation="ACCCTIPOS.xsd"/>
+
+    <!-- Definição do ACCCDOC do arquivo -->
+    <xs:complexType name="ACCCDOCComplexType">
+        <xs:sequence>
+            <xs:element name="BCARQ" type="BCARQComplexType"/>
+            <xs:element name="SISARQ" type="SISARQComplexType"/>
+            <xs:element name="ESTARQ" type="ESTARQSimpleType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definição do SISARQ -->
+    <xs:complexType name="SISARQComplexType">
+        <xs:choice>
+            <xs:element name="ACCC470" type="ACCC470ComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        <cat:InfArquivo>
+                            <cat:Descricao>Destinado participante solicitar consulta de garantia na C3.
+                            </cat:Descricao>
+                            <cat:Emissor>Participante</cat:Emissor>
+                            <cat:Destinatario>C3</cat:Destinatario>
+                        </cat:InfArquivo>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ACCC470RET" type="ACCC470RETComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        <cat:InfArquivo>
+                            <cat:Descricao>C3 retorna resultado de processamento</cat:Descricao>
+                            <cat:Emissor>C3</cat:Emissor>
+                            <cat:Destinatario>Participante</cat:Destinatario>
+                        </cat:InfArquivo>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Definição do ACCCDOC -->
+    <xs:element name="ACCCDOC" type="ACCCDOCComplexType">
+        <xs:annotation>
+            <xs:documentation>
+                <cat:InfEvento>
+                    <cat:Evento>
+                        ACCC470 - Participante Solicita Consulta de Garantia
+                    </cat:Evento>
+                    <cat:Descricao>
+                        Destinado ao particinte solicitar consulta de garantia na
+                        C3.
+                    </cat:Descricao>
+                </cat:InfEvento>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <!-- Definição do ACCC470 -->
+    <xs:complexType name="ACCC470ComplexType">
+        <xs:sequence>
+            <xs:element name="IdentdPartAdmdo" type="CNPJBase">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identificador do participante administrado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC470_NuGarantia" type="Grupo_ACCC470_NuGarantia_ComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo NuGarantia.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC470_ChaveOrdem" type="Grupo_ACCC470_ChaveOrdemComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Chave Ordem.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC470_ChaveDuplicata" type="Grupo_ACCC470_ChaveDuplicataComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Chave Duplicata.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC470_NuGarantia_ComplexType">
+        <xs:sequence>
+            <xs:element name="NUGar" type="NU" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero Único da Garantia na C3
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC470_ChaveOrdemComplexType">
+        <xs:sequence>
+            <xs:element name="NumOrdem" type="NumOrdem">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número da Ordem
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJEmit" type="CNPJ">
+                <xs:annotation>
+                    <xs:documentation>
+                        CNPJ Emitente
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJ_CPFSacd" type="CNPJ_CPF">
+                <xs:annotation>
+                    <xs:documentation>
+                        Cnpj/CPF Sacado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtEmiss" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Emissao
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Valor" type="Valor">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC470_ChNota" type="Grupo_ACCC470_ChNotaComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Chave da Nota Fiscal
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC470_ChaveDuplicataComplexType">
+        <xs:sequence>
+            <xs:element name="CodInstntoFinanc" type="CodInstntoFinanc">
+                <xs:annotation>
+                    <xs:documentation>
+                        Código instrumento financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJEmit" type="CNPJ">
+                <xs:annotation>
+                    <xs:documentation>
+                        CNPJ Emitente do instrumento financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJ_CPFSacd" type="CNPJ_CPF">
+                <xs:annotation>
+                    <xs:documentation>
+                        Cnpj/CPF Sacado do instrumento financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtVencInstntoFinanc" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de vencimento do instrumento financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VlrUnit" type="Valor">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor unitario do instrumento financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC470_ChNotaComplexType">
+        <xs:sequence>
+            <xs:element name="ChNota" type="ChNota">
+                <xs:annotation>
+                    <xs:documentation>
+                        Chave da Nota Fiscal
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definição do ACCC470RET -->
+    <xs:complexType name="ACCC470RETComplexType">
+        <xs:sequence>
+            <xs:element name="IdentdPartAdmdo" type="CNPJBaseCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identificador do participante administrado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="Grupo_Gar_Existte" type="Grupo_Gar_ExistteComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Garantias Existente
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="Grupo_Gar_Inexistte" type="Grupo_Gar_InexistteComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Garantias Inexistente
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="Grupo_Gar_Erro" type="Grupo_Gar_ExistteComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Garantias Erro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC470RET_NuGarantiaComplexType">
+        <xs:sequence>
+            <xs:element name="NUGar" type="NU" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero Único da Garantia na C3
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_Gar_ExistteComplexType">
+        <xs:sequence>
+            <xs:element name="Grupo_ACCC470RET_NuGarantia" type="Grupo_ACCC470RET_NuGarantiaComplexType" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo NuGarantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC470RET_ChaveOrdem" type="Grupo_ACCC470RET_ChaveOrdemComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Chave Ordem
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC470RET_ChaveDuplicata" type="Grupo_ACCC470RET_ChaveDuplicataComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Chave Duplicata
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC470RET_ChaveOrdemComplexType">
+        <xs:sequence>
+            <xs:element name="NumOrdem" type="NumOrdem">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero da Ordem
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJEmit" type="CNPJ">
+                <xs:annotation>
+                    <xs:documentation>
+                        CNPJ Emitente
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJ_CPFSacd" type="CNPJ_CPF">
+                <xs:annotation>
+                    <xs:documentation>
+                        Cnpj/CPF Sacado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtEmiss" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Emissao
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Valor" type="Valor">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SitRegistro" type="SitRegistro">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situação de Registro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC470RET_ChaveDuplicataComplexType">
+        <xs:sequence>
+            <xs:element name="CodInstntoFinanc" type="CodInstntoFinancCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Código instrumento financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJEmit" type="CNPJCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        CNPJ Emitente do instrumento financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJ_CPFSacd" type="CNPJ_CPFCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Cnpj/CPF Sacado do instrumento financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtVencInstntoFinanc" type="DataCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de vencimento do instrumento financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VlrUnit" type="ValorCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor unitario do instrumento financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC470_ChNota" type="Grupo_ACCC470_ChNotaComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Chave da Nota Fiscal
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SitRegistro" type="SitRegistro">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situação de Registro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SituacaoCorda" type="SituacaoCorda" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situação de Registro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="LocalRegistro" type="LocalRegistro" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Local do registro da duplicata (Comprometida com qual IMF)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_Gar_InexistteComplexType">
+        <xs:sequence>
+            <xs:element name="Grupo_ACCC470RET_NuGarantia" type="Grupo_ACCC470RET_NuGarantiaComplexType" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo NuGarantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC470RET_ChaveOrdem" type="Grupo_ACCC470RET_ChaveOrdemComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Chave Ordem
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC470RET_ChaveDuplicata" type="Grupo_ACCC470RET_ChaveDuplicataComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Chave Duplicata
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,217 @@
+﻿<xs:schema id="ACCC064"
+           targetNamespace="http://www.cip-bancos.org.br/ARQ/ACCC064.xsd"
+           elementFormDefault="qualified"
+           xmlns="http://www.cip-bancos.org.br/ARQ/ACCC064.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
+           version="8.4">
+
+    <xs:include schemaLocation="ACCCTIPOS.xsd"/>
+
+    <!-- Definição do ACCCDOC do arquivo -->
+    <xs:complexType name="ACCCDOCComplexType">
+        <xs:sequence>
+            <xs:element name="BCARQ" type="BCARQComplexType"/>
+            <xs:element name="SISARQ" type="SISARQComplexType"/>
+            <xs:element name="ESTARQ" type="ESTARQSimpleType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definição do SISARQ -->
+    <xs:complexType name="SISARQComplexType">
+        <xs:choice>
+            <xs:element name="ACCC064" type="ACCC064ComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        <cat:InfArquivo>
+                            <cat:Descricao>
+                                Destinado a C3 avisar sobre ocorrência de evento de Registro de Garantias.
+                            </cat:Descricao>
+                            <cat:Emissor>C3</cat:Emissor>
+                            <cat:Destinatario>Participante</cat:Destinatario>
+                        </cat:InfArquivo>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Definição do ACCCDOC -->
+    <xs:element name="ACCCDOC" type="ACCCDOCComplexType">
+        <xs:annotation>
+            <xs:documentation>
+                <cat:InfEvento>
+                    <cat:Evento>
+                        ACCC064 - C3 Informa Aviso de Evento de Registro de Garantias
+                    </cat:Evento>
+                    <cat:Descricao>
+                        Destinado a C3 avisar sobre ocorrência de evento de Registro de Garantias.
+                    </cat:Descricao>
+                    <cat:Observacao>
+                    </cat:Observacao>
+                </cat:InfEvento>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="ACCC064ComplexType">
+        <xs:sequence>
+            <xs:element name="Grupo_ACCC064_Garant" type="Grupo_ACCC064_GarantComplexType" maxOccurs="unbounded" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Garantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC064_GarantConsult" type="Grupo_ACCC064_GarantConsultComplexType" maxOccurs="unbounded" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Garantia Consulta
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC064_GarantConsultComplexType">
+        <xs:sequence>
+            <xs:element name="IdentdPartAdmdo" type="CNPJBase">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identificador do participante administrado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumOrdem" type="NumOrdem">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero da Ordem
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJEmit" type="CNPJ">
+                <xs:annotation>
+                    <xs:documentation>
+                        Cnpj Emitente
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJ_CPFSacd" type="CNPJ_CPF">
+                <xs:annotation>
+                    <xs:documentation>
+                        CNPJ/CPF Sacado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtEmiss" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Emissão
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Valor" type="Valor">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SitRegistro" type="SitRegistro">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situação de Solicitacao
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SituacaoCorda" type="SituacaoCorda" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situação na base centralizada
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="GrupoNFResult" type="GrupoNFResultComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo resultado de Consulta das Notas Fiscais
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC064_GarantComplexType">
+        <xs:sequence>
+            <xs:element name="IdentdPartAdmdo" type="CNPJBase">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identificador do participante administrado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumCtrlIFGar" type="ControleIFCCCCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero de controle IF da garantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NUGar" type="NU" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número Único da Garantia na C3
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SitRegistro" type="SitRegistro">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situação de Registro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SituacaoCorda" type="SituacaoCorda" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situação na base centralizada
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="GrupoNFResult" type="GrupoNFResultComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo resultado de Consulta das Notas Fiscais
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GrupoNFResultComplexType">
+        <xs:sequence>
+            <xs:element name="ChNota" type="ChNota">
+                <xs:annotation>
+                    <xs:documentation>
+                        Chave da Nota Fiscal
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SitNotaFiscal" type="SitNotaFiscal">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situacao da Nota Fiscal
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SitGarAgtValiddr" type="SitGarAgtValiddr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situação da Garantia no Agente Validador
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

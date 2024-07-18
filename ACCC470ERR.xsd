@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="ACCC470ERR"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.cip-bancos.org.br/ARQ/ACCC470ERR.xsd"
+           xmlns="http://www.cip-bancos.org.br/ARQ/ACCC470ERR.xsd"
+           xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
+           elementFormDefault="qualified"
+           version="8.4">
+
+    <xs:include schemaLocation="ACCCTIPOS.xsd"/>
+
+    <!-- Definicao do arquivo -->
+    <xs:element name="ACCCDOC" type="ACCCDOCERRComplexType">
+        <xs:annotation>
+            <xs:documentation>
+                <cat:InfEvento>
+                    <cat:Evento>ACCC470ERR - C3 informa erro no arquivo de consulta de garantia.
+                    </cat:Evento>
+                    <cat:Descricao>Destinado ao C3 informar erro no arquivo de consulta de garantia.
+                    </cat:Descricao>
+                    <cat:Servico>Erro no arquivo de inclusão de termo.</cat:Servico>
+                    <cat:TipoFluxo>
+                    </cat:TipoFluxo>
+                </cat:InfEvento>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>

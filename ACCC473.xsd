@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="ACCC473"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.cip-bancos.org.br/ARQ/ACCC473.xsd"
+           xmlns="http://www.cip-bancos.org.br/ARQ/ACCC473.xsd"
+           xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
+           elementFormDefault="qualified"
+           version="8.4">
+
+    <xs:include schemaLocation="ACCCTIPOS.xsd"/>
+
+    <!-- Definição do ACCCDOC do arquivo -->
+    <xs:complexType name="ACCCDOCComplexType">
+        <xs:sequence>
+            <xs:element name="BCARQ" type="BCARQComplexType"/>
+            <xs:element name="SISARQ" type="SISARQComplexType"/>
+            <xs:element name="ESTARQ" type="ESTARQSimpleType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definição do SISARQ -->
+    <xs:complexType name="SISARQComplexType">
+        <xs:choice>
+            <xs:element name="ACCC473" type="ACCC473ComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        <cat:InfArquivo>
+                            <cat:Descricao>Destinado ao Participante informar baixa da garantia.
+                            </cat:Descricao>
+                            <cat:Emissor>Participante</cat:Emissor>
+                            <cat:Destinatario>C3</cat:Destinatario>
+                        </cat:InfArquivo>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ACCC473RET" type="ACCC473RETComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        <cat:InfArquivo>
+                            <cat:Descricao>C3 retorna resultado de processamento</cat:Descricao>
+                            <cat:Emissor>C3</cat:Emissor>
+                            <cat:Destinatario>Participante</cat:Destinatario>
+                        </cat:InfArquivo>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Definição do ACCCDOC -->
+    <xs:element name="ACCCDOC" type="ACCCDOCComplexType">
+        <xs:annotation>
+            <xs:documentation>
+                <cat:InfEvento>
+                    <cat:Evento>
+                        ACCC473 - Participante Informar Baixa de Garantia
+                    </cat:Evento>
+                    <cat:Descricao>
+                        Destinado ao Participante informar o baixa da garantia.
+                    </cat:Descricao>
+                </cat:InfEvento>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <!-- Definição do ACCC473 -->
+    <xs:complexType name="ACCC473ComplexType">
+        <xs:sequence>
+            <xs:element name="IdentdPartAdmdo" type="CNPJBase">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identificador do participante administrado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumCtrlIFEvt" type="ControleIFCCC">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número de controle do contrato da IF
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC473_GarBaix" type="Grupo_ACCC473_GarBaix_ComplexType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Contrato.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC473_GarBaix_ComplexType">
+        <xs:sequence>
+            <xs:element name="NUGar" type="NU" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número único da Garantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definição do ACCC473RET -->
+    <xs:complexType name="ACCC473RETComplexType">
+        <xs:sequence>
+            <xs:element name="IdentdPartAdmdo" type="CNPJBaseCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identificador do participante administrado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_Evt_Acto" type="Grupo_Evt_ActoComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Evento Aceitos
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_Evt_Recsdo" type="Grupo_Evt_RecsdoComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Evento Recusados
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_Evt_ActoComplexType">
+        <xs:sequence>
+            <xs:element name="Grupo_ACCC473RET_EvtActo" type="Grupo_ACCC473RET_EvtActoComplexType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Eventos Aceitos
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC473RET_EvtActoComplexType">
+        <xs:sequence>
+            <xs:element name="NumCtrlIFGar" type="ControleIFCCC">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número de controle de contrato da IF
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NUGar" type="NUCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero Único do Contrato na C3
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NUEvt" type="NU">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero Único do Contrato na C3
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SitRegistro" type="SitRegistro">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situacao do Registro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_Evt_RecsdoComplexType">
+        <xs:sequence>
+            <xs:element name="NUGar" type="NUCodErr" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número único da Garantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

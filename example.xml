@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ACCCDOC xmlns="http://www.cip-bancos.org.br/ARQ/ACCC471.xsd"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.cip-bancos.org.br/ARQ/ACCC471.xsd ACCC471.xsd">
+
+    <BCARQ>
+        <NomArq>Exemplo</NomArq>
+        <NumCtrlEmis>12345678901234567890</NumCtrlEmis>
+        <ISPBEmissor>12345678</ISPBEmissor>
+        <ISPBDestinatario>87654321</ISPBDestinatario>
+        <DtHrArq>2024-12-10T12:24:13</DtHrArq>
+        <SitReq>2</SitReq>
+        <Grupo_Seq>
+            <NumSeq>1</NumSeq>
+            <IndrCont>N</IndrCont>
+        </Grupo_Seq>
+        <DtRef>2000-01-01</DtRef>
+    </BCARQ>
+
+    <SISARQ>
+        <ACCC471>
+            <Grupo_ACCC471_GarSCR>
+                <IdentdPartAdmdo>12345678</IdentdPartAdmdo>
+                <NumCtrlIFGar>1234567890123456789012345678901234567890</NumCtrlIFGar>
+                <TpGar>1</TpGar>
+                <TpGarSCR>1</TpGarSCR>
+                <SubTpGarSCR>1</SubTpGarSCR>
+                <SitGar>1</SitGar>
+                <IndrBemFincd>S</IndrBemFincd>
+                <PercGar>100.0</PercGar>
+                <VlrOrGar>10000.00</VlrOrGar>
+                <VlrGarDtReaval>9000.00</VlrGarDtReaval>
+                <DtReaval>2023-01-01</DtReaval>
+                <ClassRscCesta>1</ClassRscCesta>
+                <Grupo_ACCC471_Veic>
+                    <VlrEntdVeic>5000.00</VlrEntdVeic>
+                    <IdentdChassi>9BWZZZ377VT004251</IdentdChassi>
+                    <TpVeic>1</TpVeic>
+                    <TpTabVeicl>1</TpTabVeicl>
+                    <CodTabVeicl>1</CodTabVeicl>
+                    <UFCodTabVeicl>SP</UFCodTabVeicl>
+                    <IndrVeicUsado>S</IndrVeicUsado>
+                    <NumPlaca>ABC1234</NumPlaca>
+                    <UFNumPlaca>SP</UFNumPlaca>
+                    <KM>10000</KM>
+                    <RENAVAM>123456789</RENAVAM>
+                    <NumNota>12345</NumNota>
+                    <NumSerNota>1</NumSerNota>
+                    <VlrNota>30000.00</VlrNota>
+                    <DtEmiss>2023-01-01</DtEmiss>
+                    <Grupo_ACCC471_IdentcVeic>
+                        <VlrMercVeic>25000.00</VlrMercVeic>
+                        <CodCatg>1</CodCatg>
+                        <CodMarca>1</CodMarca>
+                        <CodModl>1</CodModl>
+                        <AnoModlVeicl>2022</AnoModlVeicl>
+                        <AnoFabrccVeicl>2001</AnoFabrccVeicl>
+                    </Grupo_ACCC471_IdentcVeic>
+                </Grupo_ACCC471_Veic>
+                <Grupo_ACCC471_Imovel>
+                    <TpImovl>1</TpImovl>
+                    <TpUsoImovl>1</TpUsoImovl>
+                    <NumInscrMuncplImovl>12345678</NumInscrMuncplImovl>
+                    <NumMatriclImovl>123456</NumMatriclImovl>
+                    <IdCartrio>1234</IdCartrio>
+                    <Grupo_ACCC471_EndImovel>
+                        <TpEndImovl>1</TpEndImovl>
+                        <EndImovl>Rua Exemplo, 123</EndImovl>
+                        <CEPImovl>12345678</CEPImovl>
+                        <CidImovl>São Paulo</CidImovl>
+                        <UFImovl>SP</UFImovl>
+                        <PaisImovl>Brasil</PaisImovl>
+                    </Grupo_ACCC471_EndImovel>
+                </Grupo_ACCC471_Imovel>
+                <Grupo_ACCC471_GarFidejussoria>
+                    <SeqGarFidjssria>1</SeqGarFidjssria>
+                    <TpPessoaGarFidjssria>1</TpPessoaGarFidjssria>
+                    <CNPJ_CPFPessoaGarFidjssria>12345678901</CNPJ_CPFPessoaGarFidjssria>
+                    <Grupo_ACCC471_GarFidjssriaPF>
+                        <NomPessoaGarFidjssria>Fulano de Tal</NomPessoaGarFidjssria>
+                        <NomMae>Maria</NomMae>
+                        <EstadoCivil>SL</EstadoCivil>
+                        <CPFConjuge>12345678901</CPFConjuge>
+                        <NomConjuge>Beltrano</NomConjuge>
+                        <PortePessoaGarFidjssriaPF>1</PortePessoaGarFidjssriaPF>
+                        <TpIdentc>12</TpIdentc>
+                        <NumIdentc>12345678</NumIdentc>
+                    </Grupo_ACCC471_GarFidjssriaPF>
+                </Grupo_ACCC471_GarFidejussoria>
+            </Grupo_ACCC471_GarSCR>
+        </ACCC471>
+    </SISARQ>
+
+    <ESTARQ />
+</ACCCDOC>
