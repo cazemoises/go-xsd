@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/clbanning/mxj/v2"
 )
@@ -50,14 +51,52 @@ func validateXMLWithXSD(xmlData []byte, xsdPath string) error {
 	return nil
 }
 
-func XMLToJSON(xmlData []byte) ([]byte, error) {
+func removeUnwantedAttributes(m map[string]interface{}) {
+	for k := range m {
+		if strings.HasPrefix(k, "-") {
+			delete(m, k)
+		} else if subMap, ok := m[k].(map[string]interface{}); ok {
+			removeUnwantedAttributes(subMap)
+		} else if subSlice, ok := m[k].([]interface{}); ok {
+			for _, item := range subSlice {
+				if itemMap, ok := item.(map[string]interface{}); ok {
+					removeUnwantedAttributes(itemMap)
+				}
+			}
+		}
+	}
+}
 
+func addNamespaceToXML(xmlData []byte, namespace string) ([]byte, error) {
+	type Temp struct {
+		XMLName xml.Name
+		Content []byte `xml:",innerxml"`
+	}
+
+	var temp Temp
+	if err := xml.Unmarshal(xmlData, &temp); err != nil {
+		return nil, fmt.Errorf("erro ao parsear XML: %v", err)
+	}
+
+	temp.XMLName.Space = namespace
+	output, err := xml.MarshalIndent(temp, "", "  ")
+	if err != nil {
+		return nil, fmt.Errorf("erro ao re-marshalar XML: %v", err)
+	}
+
+	return output, nil
+}
+
+func XMLToJSON(xmlData []byte) ([]byte, error) {
 	mv, err := mxj.NewMapXml(xmlData)
 	if err != nil {
 		return nil, fmt.Errorf("erro ao converter XML para Map: %v", err)
 	}
 
-	jsonData, err := json.MarshalIndent(mv, "", "  ")
+	m := map[string]interface{}(mv)
+	removeUnwantedAttributes(m)
+
+	jsonData, err := json.MarshalIndent(m, "", "  ")
 	if err != nil {
 		return nil, fmt.Errorf("erro ao converter Map para JSON: %v", err)
 	}
@@ -65,19 +104,35 @@ func XMLToJSON(xmlData []byte) ([]byte, error) {
 	return jsonData, nil
 }
 
-
 func JSONToXML(jsonData []byte) ([]byte, error) {
 	var mv map[string]interface{}
 	if err := json.Unmarshal(jsonData, &mv); err != nil {
 		return nil, fmt.Errorf("erro ao converter JSON para Map: %v", err)
 	}
 
-	xmlData, err := mxj.Map(mv).XmlIndent("", "  ")
+	order := []string{"ACCCDOC", "NomArq", "DtHrArq", "SISARQ", "ESTARQ"}
+
+	xmlMap := mxj.Map(mv)
+	fmt.Println("DEPOIS DO MAP")
+	fmt.Println(xmlMap)
+	xmlData, err := xmlMap.XmlIndent("", "  ", order...)
 	if err != nil {
 		return nil, fmt.Errorf("erro ao converter Map para XML: %v", err)
 	}
-
+	
+	fmt.Println("ABCDEj")
+	fmt.Println(string(xmlData))
+	fmt.Println("CAZE MOISES")	
 	xmlData = append([]byte(xml.Header), xmlData...)
+	fmt.Println(string(xmlData))
+	fmt.Println("CAZE MOISES")	
+	
+	xmlData, err = addNamespaceToXML(xmlData, "http://www.cip-bancos.org.br/ARQ/ACCC471.xsd")
+	fmt.Println("CAZE MOISES")	
+	if err != nil {
+		return nil, fmt.Errorf("erro ao adicionar namespace ao XML: %v", err)
+	}
+
 
 	return xmlData, nil
 }
@@ -133,6 +188,7 @@ func handleJSONToXML(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := validateXMLWithXSD(xmlData, "./ACCC471.xsd"); err != nil {
+		fmt.Println(string(xmlData))
 		sendError(w, http.StatusBadRequest, 1008, fmt.Sprintf("Falha na validação do XML após a conversão: %v", err))
 		return
 	}
@@ -142,13 +198,6 @@ func handleJSONToXML(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	path, err := exec.LookPath("xmllint")
-	if err != nil {
-		fmt.Println("xmllint não encontrado no path")
-		os.Exit(1)
-	}
-	fmt.Println("xmllint encontrado em", path)
-
 	http.HandleFunc("/validate-xml", handleValidateXML)
 	http.HandleFunc("/xml-to-json", handleXMLToJSON)
 	http.HandleFunc("/json-to-xml", handleJSONToXML)
