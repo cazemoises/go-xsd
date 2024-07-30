@@ -70,8 +70,6 @@ func JSONToXML(jsonData []byte) ([]byte, error) {
 		return nil, fmt.Errorf("erro ao converter JSON para Map: %v", err)
 	}
 
-	mv = addPrefixes(mv)
-
 	xmlData, err := mxj.Map(mv).XmlIndent("", "  ")
 	if err != nil {
 		return nil, fmt.Errorf("erro ao converter Map para XML: %v", err)
@@ -80,27 +78,6 @@ func JSONToXML(jsonData []byte) ([]byte, error) {
 	xmlData = append([]byte(xml.Header), xmlData...)
 
 	return xmlData, nil
-}
-
-func addPrefixes(m map[string]interface{}) map[string]interface{} {
-	for k, v := range m {
-		switch v := v.(type) {
-		case map[string]interface{}:
-			m[k] = addPrefixes(v)
-		case []interface{}:
-			for i, e := range v {
-				if em, ok := e.(map[string]interface{}); ok {
-					v[i] = addPrefixes(em)
-				}
-			}
-		}
-
-		if len(k) > 0 && k[0] == '-' {
-			m["@"+k[1:]] = v
-			delete(m, k)
-		}
-	}
-	return m
 }
 
 func handleValidateXML(w http.ResponseWriter, r *http.Request) {
