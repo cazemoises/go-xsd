@@ -51,6 +51,7 @@ func validateXMLWithXSD(xmlData []byte, xsdPath string) error {
 }
 
 func XMLToJSON(xmlData []byte) ([]byte, error) {
+
 	mv, err := mxj.NewMapXml(xmlData)
 	if err != nil {
 		return nil, fmt.Errorf("erro ao converter XML para Map: %v", err)
@@ -63,6 +64,7 @@ func XMLToJSON(xmlData []byte) ([]byte, error) {
 
 	return jsonData, nil
 }
+
 
 func JSONToXML(jsonData []byte) ([]byte, error) {
 	var mv map[string]interface{}
