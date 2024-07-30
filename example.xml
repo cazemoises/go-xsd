@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ACCCDOC xmlns="http://www.cip-bancos.org.br/ARQ/ACCC471.xsd"
-         xmlns:xs="http://www.w3.org/2001/XMLSchema"
-         xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
+<ACCCDOC xmlns="http://www.cip-bancos.org.br/ARQ/ACCC471.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://www.cip-bancos.org.br/ARQ/ACCC471.xsd ACCC471.xsd">
 

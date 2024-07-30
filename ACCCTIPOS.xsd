@@ -2729,7 +2729,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-fff    <xs:complexType name="NumIdentdResCodErr">
+    <xs:complexType name="NumIdentdResCodErr">
         <xs:annotation>
             <xs:documentation>
                 Número identificador da reserva com atributo para retorno de código de erro.
