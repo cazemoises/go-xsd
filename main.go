@@ -51,11 +51,13 @@ func validateXMLWithXSD(xmlData []byte, xsdPath string) error {
 }
 
 func XMLToJSON(xmlData []byte) ([]byte, error) {
-
 	mv, err := mxj.NewMapXml(xmlData)
 	if err != nil {
 		return nil, fmt.Errorf("erro ao converter XML para Map: %v", err)
 	}
+
+	// Remove os atributos que começam com "-"
+	removeAttributes(mv)
 
 	jsonData, err := json.MarshalIndent(mv, "", "  ")
 	if err != nil {
@@ -65,12 +67,41 @@ func XMLToJSON(xmlData []byte) ([]byte, error) {
 	return jsonData, nil
 }
 
+func removeAttributes(mv map[string]interface{}) {
+	for key, value := range mv {
+		switch value.(type) {
+		case map[string]interface{}:
+			removeAttributes(value.(map[string]interface{}))
+		case []interface{}:
+			for _, v := range value.([]interface{}) {
+				if m, ok := v.(map[string]interface{}); ok {
+					removeAttributes(m)
+				}
+			}
+		}
+		if key[0] == '-' {
+			delete(mv, key)
+		}
+	}
+}
 
 func JSONToXML(jsonData []byte) ([]byte, error) {
 	var mv map[string]interface{}
 	if err := json.Unmarshal(jsonData, &mv); err != nil {
 		return nil, fmt.Errorf("erro ao converter JSON para Map: %v", err)
 	}
+
+	// Adiciona manualmente os namespaces e a raiz do XML se não estiverem presentes
+	if _, ok := mv["ACCCDOC"]; !ok {
+		mv["ACCCDOC"] = map[string]interface{}{}
+	}
+
+	acccdoc := mv["ACCCDOC"].(map[string]interface{})
+	acccdoc["-xmlns"] = "http://www.cip-bancos.org.br/ARQ/ACCC471.xsd"
+	acccdoc["-xmlns:xs"] = "http://www.w3.org/2001/XMLSchema"
+	acccdoc["-xmlns:cat"] = "http://www.cip-bancos.org.br/catalogomsg"
+	acccdoc["-xmlns:xsi"] = "http://www.w3.org/2001/XMLSchema-instance"
+	acccdoc["-xsi:schemaLocation"] = "http://www.cip-bancos.org.br/ARQ/ACCC471.xsd ACCC471.xsd"
 
 	xmlData, err := mxj.Map(mv).XmlIndent("", "  ")
 	if err != nil {
@@ -89,7 +120,7 @@ func handleValidateXML(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := validateXMLWithXSD(xmlData, "./ACCC471.xsd"); err != nil {
+	if err := validateXMLWithXSD(xmlData, "./xsds/ACCC471.xsd"); err != nil {
 		sendError(w, http.StatusBadRequest, 1002, fmt.Sprintf("Falha na validação do XML: %v", err))
 		return
 	}
@@ -104,7 +135,7 @@ func handleXMLToJSON(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := validateXMLWithXSD(xmlData, "./ACCC471.xsd"); err != nil {
+	if err := validateXMLWithXSD(xmlData, "./xsds/ACCC471.xsd"); err != nil {
 		sendError(w, http.StatusBadRequest, 1004, fmt.Sprintf("Falha na validação do XML antes da conversão: %v", err))
 		return
 	}
@@ -132,7 +163,9 @@ func handleJSONToXML(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := validateXMLWithXSD(xmlData, "./ACCC471.xsd"); err != nil {
+	fmt.Println(string(xmlData))
+
+	if err := validateXMLWithXSD(xmlData, "./xsds/ACCC471.xsd"); err != nil {
 		sendError(w, http.StatusBadRequest, 1008, fmt.Sprintf("Falha na validação do XML após a conversão: %v", err))
 		return
 	}
