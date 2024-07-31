@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
@@ -9,7 +10,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/clbanning/mxj/v2"
+	xml2json "github.com/basgys/goxml2json"
 )
 
 type ErrorResponse struct {
@@ -51,38 +52,12 @@ func validateXMLWithXSD(xmlData []byte, xsdPath string) error {
 }
 
 func XMLToJSON(xmlData []byte) ([]byte, error) {
-	mv, err := mxj.NewMapXml(xmlData)
+	jsonData, err := xml2json.Convert(bytes.NewReader(xmlData))
 	if err != nil {
-		return nil, fmt.Errorf("erro ao converter XML para Map: %v", err)
+		return nil, fmt.Errorf("erro ao converter XML para JSON: %v", err)
 	}
 
-	// Remove os atributos que começam com "-"
-	removeAttributes(mv)
-
-	jsonData, err := json.MarshalIndent(mv, "", "  ")
-	if err != nil {
-		return nil, fmt.Errorf("erro ao converter Map para JSON: %v", err)
-	}
-
-	return jsonData, nil
-}
-
-func removeAttributes(mv map[string]interface{}) {
-	for key, value := range mv {
-		switch value.(type) {
-		case map[string]interface{}:
-			removeAttributes(value.(map[string]interface{}))
-		case []interface{}:
-			for _, v := range value.([]interface{}) {
-				if m, ok := v.(map[string]interface{}); ok {
-					removeAttributes(m)
-				}
-			}
-		}
-		if key[0] == '-' {
-			delete(mv, key)
-		}
-	}
+	return jsonData.Bytes(), nil
 }
 
 func JSONToXML(jsonData []byte) ([]byte, error) {
@@ -103,7 +78,7 @@ func JSONToXML(jsonData []byte) ([]byte, error) {
 	acccdoc["-xmlns:xsi"] = "http://www.w3.org/2001/XMLSchema-instance"
 	acccdoc["-xsi:schemaLocation"] = "http://www.cip-bancos.org.br/ARQ/ACCC471.xsd ACCC471.xsd"
 
-	xmlData, err := mxj.Map(mv).XmlIndent("", "  ")
+	xmlData, err := jsonToXMLHelper(mv)
 	if err != nil {
 		return nil, fmt.Errorf("erro ao converter Map para XML: %v", err)
 	}
@@ -111,6 +86,35 @@ func JSONToXML(jsonData []byte) ([]byte, error) {
 	xmlData = append([]byte(xml.Header), xmlData...)
 
 	return xmlData, nil
+}
+
+func jsonToXMLHelper(v interface{}) ([]byte, error) {
+	switch vv := v.(type) {
+	case map[string]interface{}:
+		var buf bytes.Buffer
+		buf.WriteString("<root>")
+		for key, value := range vv {
+			child, err := jsonToXMLHelper(value)
+			if err != nil {
+				return nil, err
+			}
+			buf.WriteString(fmt.Sprintf("<%s>%s</%s>", key, child, key))
+		}
+		buf.WriteString("</root>")
+		return buf.Bytes(), nil
+	case []interface{}:
+		var buf bytes.Buffer
+		for _, value := range vv {
+			child, err := jsonToXMLHelper(value)
+			if err != nil {
+				return nil, err
+			}
+			buf.Write(child)
+		}
+		return buf.Bytes(), nil
+	default:
+		return []byte(fmt.Sprintf("%v", vv)), nil
+	}
 }
 
 func handleValidateXML(w http.ResponseWriter, r *http.Request) {
