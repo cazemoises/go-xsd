@@ -1,0 +1,1783 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="ACCC471"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.cip-bancos.org.br/ARQ/ACCC471.xsd"
+           xmlns="http://www.cip-bancos.org.br/ARQ/ACCC471.xsd"
+           xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
+           elementFormDefault="qualified"
+           version="8.4">
+
+    <xs:include schemaLocation="ACCCTIPOS.xsd"/>
+
+    <!-- Definição do ACCCDOC do arquivo -->
+    <xs:complexType name="ACCCDOCComplexType">
+        <xs:sequence>
+            <xs:element name="BCARQ" type="BCARQComplexType"/>
+            <xs:element name="SISARQ" type="SISARQComplexType"/>
+            <xs:element name="ESTARQ" type="ESTARQSimpleType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definição do SISARQ -->
+    <xs:complexType name="SISARQComplexType">
+        <xs:choice>
+            <xs:element name="ACCC471" type="ACCC471ComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        <cat:InfArquivo>
+                            <cat:Descricao>Destinado ao Participante informar Registro de Garantia na C3.
+                            </cat:Descricao>
+                            <cat:Emissor>Participante</cat:Emissor>
+                            <cat:Destinatario>C3</cat:Destinatario>
+                        </cat:InfArquivo>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ACCC471RET" type="ACCC471RETComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        <cat:InfArquivo>
+                            <cat:Descricao>C3 retorna resultado de processamento</cat:Descricao>
+                            <cat:Emissor>C3</cat:Emissor>
+                            <cat:Destinatario>Participante</cat:Destinatario>
+                        </cat:InfArquivo>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Definição do ACCCDOC -->
+    <xs:element name="ACCCDOC" type="ACCCDOCComplexType">
+        <xs:annotation>
+            <xs:documentation>
+                <cat:InfEvento>
+                    <cat:Evento>
+                        ACCC471 - Participante Informa Registro de Garantia
+                    </cat:Evento>
+                    <cat:Descricao>
+                        Destinado ao participante informar o registro de garantia na C3.
+                    </cat:Descricao>
+                </cat:InfEvento>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <!-- Definição do ACCC471 -->
+    <xs:complexType name="ACCC471ComplexType">
+        <xs:sequence>
+            <xs:element name="Grupo_ACCC471_GarSCR" type="Grupo_ACCC471_GarSCRComplexType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Contrato.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC471_GarSCRComplexType">
+        <xs:sequence>
+            <xs:element name="IdentdPartAdmdo" type="CNPJBase">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identificador do participante administrado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumCtrlIFGar" type="ControleIFCCC">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número de controle IF da garantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpGar" type="TpGarCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo da Garantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpGarSCR" type="TpGarSCRCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo da Garantia no SCR
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SubTpGarSCR" type="SubTpGarSCRCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Subtipo da Garantia no SCR
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SitGar" type="SitGar">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situação da garantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IndrBemFincd" type="IndrCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Indicador de Bem Financiado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PercGar" type="PercentualCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Percentual de garantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VlrOrGar" type="ValorCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor Original da
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VlrGarDtReaval" type="ValorCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor da Garantia na Data de Reavaliação
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtReaval" type="DataCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de Reavaliação
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ClassRscCesta" type="ClassRscCesta" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Classificação de Risco Cesta
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_Veic" type="Grupo_ACCC471_VeicComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_Imovel" type="Grupo_ACCC471_ImovelComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Imóvel
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_GarFidejussoria" type="Grupo_ACCC471_GarFidejussoriaComplexType"
+                        minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_Equipmnt" type="GrupoEquipmntComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Equipamentos
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_InstntoFinanc" type="GrupoInstntoFinancComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_Mercdria" type="GrupoMercdriaComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Mercadoria
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC471_ImovelComplexType">
+        <xs:sequence>
+            <xs:element name="TpImovl" type="TpImovl">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo do Imóvel
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpUsoImovl" type="TpUsoImovl">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo de Uso do Imóvel
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumInscrMuncplImovl" type="NumInscrMuncplImovl">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número Inscrição Municipal Imóvel
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumMatriclImovl" type="NumMatriclImovl">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número Matrícula Imóvel
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IdCartrio" type="IdCartrioInstntoFinanc">
+                <xs:annotation>
+                    <xs:documentation>
+                        ID Cartório
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_EndImovel" type="GrupoEndImovelComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Endereço do Imóvel
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GrupoRETImovelComplexType">
+        <xs:sequence>
+            <xs:element name="TpImovl" type="TpImovlCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo do Imóvel
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpUsoImovl" type="TpUsoImovlCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo de Uso do Imóvel
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumInscrMuncplImovl" type="NumInscrMuncplImovlCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número Inscrição Municipal Imóvel
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumMatriclImovl" type="NumMatriclImovlCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número Matrícula Imóvel
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IdCartrio" type="IdCartrioInstntoFinancCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        ID Cartório
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_EndImovel" type="GrupoEndImovelComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Endereço do Imóvel
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC471_GarFidejussoriaComplexType">
+        <xs:sequence>
+            <xs:element name="SeqGarFidjssria" type="SeqGarFidjssria">
+                <xs:annotation>
+                    <xs:documentation>
+                        Sequencia Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpPessoaGarFidjssria" type="TpPessoa">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo de Cliente Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJ_CPFPessoaGarFidjssria" type="CNPJ_CPF">
+                <xs:annotation>
+                    <xs:documentation>
+                        CNPJ ou CPF Pessoa Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="Grupo_ACCC471_GarFidjssriaPF" type="Grupo_ACCC471_GarFidjssriaPFComplexType"
+                        minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Garantia Fidejussória Pessoa Física
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_GarFidjssriaPJ" type="Grupo_ACCC471_GarFidjssriaPJComplexType"
+                        minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Garantia Fidejussória Pessoa Jurídica
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_EndGarFidjssria" type="Grupo_ACCC471_EndGarFidjssriaComplexType"
+                        minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Endereço Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GrupoRETGarFidejussoriaComplexType">
+        <xs:sequence>
+            <xs:element name="SeqGarFidjssria" type="SeqGarFidjssriaCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Sequencia Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpPessoaGarFidjssria" type="TpPessoaCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo de Cliente Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJ_CPFPessoaGarFidjssria" type="CNPJ_CPFCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        CNPJ ou CPF Pessoa Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_GarFidjssriaPF" type="Grupo_ACCC471_GarFidjssriaPFComplexType"
+                        minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Garantia Fidejussória Pessoa Física
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_GarFidjssriaPJ" type="Grupo_ACCC471RET_GarFidjssriaPJComplexType"
+                        minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Garantia Fidejussória Pessoa Jurídica
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_EndGarFidjssria" type="Grupo_ACCC471_EndGarFidjssriaComplexType"
+                        minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Endereço Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC471_GarFidjssriaPJComplexType">
+        <xs:sequence>
+            <xs:element name="NomEmpGarFidjssria" type="Nome">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nome da Empresa Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtAbert" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Abertura
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TelComl" type="NumTel" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Telefone Comercial
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NomContato" type="Nome" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nome Contato
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpCtrl" type="TpCtrl">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo de Controle
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Fatrmnt" type="Valor">
+                <xs:annotation>
+                    <xs:documentation>
+                        Faturamento
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PortePessoaGarFidjssriaPJ" type="PorteCli">
+                <xs:annotation>
+                    <xs:documentation>
+                        Porte da Pessoa Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_ReprLegal" type="GrupoReprLegalComplexType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Representante Legal
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC471RET_GarFidjssriaPJComplexType">
+        <xs:sequence>
+            <xs:element name="NomEmpGarFidjssria" type="NomeCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nome da Empresa Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtAbert" type="DataCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Abertura
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TelComl" type="NumTelCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Telefone Comercial
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NomContato" type="NomeCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nome Contato
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpCtrl" type="TpCtrlCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo de Controle
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Fatrmnt" type="ValorCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Faturamento
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PortePessoaGarFidjssriaPJ" type="PorteCliCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Porte da Pessoa Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_ReprLegal" type="GrupoReprLegalComplexType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Representante Legal
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC471_GarFidjssriaPFComplexType">
+        <xs:sequence>
+            <xs:element name="NomPessoaGarFidjssria" type="NomeCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nome Pessoa Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NomMae" type="NomeCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nome da Mãe
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="EstadoCivil" type="EstadoCivilCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Estado Civil
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CPFConjuge" type="CPFCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        CPF Cônjuge
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NomConjuge" type="NomeCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nome do Cônjuge
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PortePessoaGarFidjssriaPF" type="PorteCliCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Porte da Pessoa Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpIdentc" type="TpIdentcCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo de Identificação
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumIdentc" type="NumDocIdentcCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número de Identificação
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC471_EndGarFidjssriaComplexType">
+        <xs:sequence>
+            <xs:element name="TpEndGarFidjssria" type="TpEndCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo de Endereço Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="EndGarFidjssria" type="EndCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Endereço Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CEPEndGarFidjssria" type="CEPCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        CEP Endereço Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CidEndGarFidjssria" type="CidadeCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Cidade Endereço Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UFEndGarFidjssria" type="UFCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        UF Endereço Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PaisEndGarFidjssria" type="PaisCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Pais Endereço Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="GrupoInstntoFinancComplexType">
+        <xs:sequence>
+            <xs:element name="TpInstntoFinanc" type="TpInstntoFinanc">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CodInstntoFinanc" type="CodInstntoFinanc">
+                <xs:annotation>
+                    <xs:documentation>
+                        Código Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtEmissInstntoFinanc" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Emissão Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtinialInstntoFinanc" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Inicial Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtVencInstntoFinanc" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Vencimento Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="QtdEmitd" type="Qtd">
+                <xs:annotation>
+                    <xs:documentation>
+                        Quantidade Emitida Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VlrUnit" type="Valor">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor Unitário Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumMatriclInstntoFinanc" type="NumMatriclInstntoFinanc" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número Matrícula Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IdCartrioInstntoFinanc" type="IdCartrioInstntoFinanc">
+                <xs:annotation>
+                    <xs:documentation>
+                        ID Cartório Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumFatr" type="NumFatr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero da Fatura
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpDuplicata" type="TpDuplicata">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo da Duplicata
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Obs" type="Obs">
+                <xs:annotation>
+                    <xs:documentation>
+                        Observacoes/Descricao (Duplicada e nota fiscal respectivamente)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ConfcActe" type="ConfcActe">
+                <xs:annotation>
+                    <xs:documentation>
+                        Confirmacao de Aceite (duplicata)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtConfcActe" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de confirmacao do Aceite
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VlrDesct" type="Valor">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor de Desconto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtIniDesct" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de inicio do desconto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtFimDesct" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de fim do desconto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_Pessoa" type="GrupoPessoa" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Pessoa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_NotaFiscal" type="NotaFiscalDupComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Pessoa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_VenctoOrdem" type="VenctoOrdemComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Pessoa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_Boleto" type="BoletoDupComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Pessoa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GrupoRETInstntoFinancComplexType">
+        <xs:sequence>
+            <xs:element name="TpInstntoFinanc" type="TpInstntoFinancCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CodInstntoFinanc" type="CodInstntoFinancCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Código Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtEmissInstntoFinanc" type="DataCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Emissão Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtinialInstntoFinanc" type="DataCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Inicial Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtVencInstntoFinanc" type="DataCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Vencimento Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="QtdEmitd" type="QtdCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Quantidade Emitida Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VlrUnit" type="ValorCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor Unitário Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumMatriclInstntoFinanc" type="NumMatriclInstntoFinancCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número Matrícula Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IdCartrioInstntoFinanc" type="IdCartrioInstntoFinancCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        ID Cartório Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumFatr" type="NumFatrCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero da Fatura
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpDuplicata" type="TpDuplicataCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo da Duplicata
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Obs" type="ObsCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Observacoes/Descricao (Duplicada e nota fiscal respectivamente)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ConfcActe" type="ConfcActeCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Confirmacao de Aceite (duplicata)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtConfcActe" type="DataCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de confirmacao do Aceite
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VlrDesct" type="ValorCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor de Desconto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtIniDesct" type="DataCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de inicio do desconto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtFimDesct" type="DataCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de fim do desconto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_Pessoa" type="GrupoPessoaRET" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Pessoa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_NotaFiscal" type="NotaFiscalDupComplexType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Pessoa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_VenctoOrdem" type="VenctoOrdemComplexType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Pessoa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_Boleto" type="BoletoDupComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Pessoa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="GrupoPessoa">
+        <xs:sequence>
+            <xs:element name="TpPessoaInstntoFinanc" type="TpPessoaInstntoFinanc">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo Pessoa Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJ_CPFPessoaInstntoFinanc" type="CNPJ_CPF">
+                <xs:annotation>
+                    <xs:documentation>
+                        CNPJ ou CPF Pessoa Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NomPessoaInstntoFinanc" type="Nome">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nome Pessoa Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpPessoaVincdInstntoFinanc" type="TpPessoaFisica_JuridicaCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo Pessoa Vinculada Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="InscrEstadl" type="InscrEstadl" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Inscrição Estadual
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PcaPgto" type="PcaPgto">
+                <xs:annotation>
+                    <xs:documentation>
+                        Preça de Pagamento
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_EndPessoa" type="GrupoEndPessoaDupComplexType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Endereço Pessoa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GrupoPessoaRET">
+        <xs:sequence>
+            <xs:element name="TpPessoaInstntoFinanc" type="TpPessoaInstntoFinancCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo Pessoa Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJ_CPFPessoaInstntoFinanc" type="CNPJ_CPFCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        CNPJ ou CPF Pessoa Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NomPessoaInstntoFinanc" type="NomeCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nome Pessoa Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpPessoaVincdInstntoFinanc" type="TpPessoaCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo Pessoa Vinculada Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="InscrEstadl" type="InscrEstadlCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Inscrição Estadual
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PcaPgto" type="PcaPgtoCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Preça de Pagamento
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_EndPessoa" type="GrupoEndPessoaDupComplexType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Endereço Pessoa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="GrupoMercdriaComplexType">
+        <xs:sequence>
+            <xs:element name="TpProdt" type="TpProdt">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo Produto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CodProdt" type="CodProdt">
+                <xs:annotation>
+                    <xs:documentation>
+                        Código Produto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DescProdt" type="DescProdt">
+                <xs:annotation>
+                    <xs:documentation>
+                        Descrição do Produto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PesoLiqdProdt" type="Peso">
+                <xs:annotation>
+                    <xs:documentation>
+                        Peso Líquido Produto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="AnoSaf" type="Ano" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        AnoSaf
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="QtdProdt" type="Qtd">
+                <xs:annotation>
+                    <xs:documentation>
+                        Quantidade do Produto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UniddProdt" type="Qtd">
+                <xs:annotation>
+                    <xs:documentation>
+                        Unidade do Produto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_End" type="GrupoMercdriaEndComplexType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Endereço
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GrupoRETMercdriaComplexType">
+        <xs:sequence>
+            <xs:element name="TpProdt" type="TpProdtCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo Produto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CodProdt" type="CodProdtCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Código Produto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DescProdt" type="DescProdtCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Descrição do Produto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PesoLiqdProdt" type="PesoCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Peso Líquido Produto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="AnoSaf" type="AnoCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        AnoSaf
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="QtdProdt" type="QtdCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Quantidade do Produto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UniddProdt" type="QtdCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Unidade do Produto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_End" type="GrupoMercdriaEndComplexType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Endereço
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC471_VeicComplexType">
+        <xs:sequence>
+            <xs:element name="VlrEntdVeic" type="ValorCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor Entrada do Veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IdentdChassi" type="IdChassiCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identificador do chassi do veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpVeic" type="TpVeicl">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo do Veiculo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpTabVeicl" type="TpTabVeicl">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo de Tabela Veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CodTabVeicl" type="CodTabVeicl">
+                <xs:annotation>
+                    <xs:documentation>
+                        Código Tabela Veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UFCodTabVeicl" type="UF" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        UF Código Tabela Veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IndrVeicUsado" type="Indr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Indicador de Veiculo Usado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumPlaca" type="NumPlacaVeic" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero da Placa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UFNumPlaca" type="UF" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        UF Numero da Placa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="KM" type="Qtd" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Quilometragem
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RENAVAM" type="Renavam" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Renavam
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumNota" type="NumNotaFiscal" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número da Nota
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumSerNota" type="NumSerNotaFiscal" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número de Serie da Nota
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VlrNota" type="Valor" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor da Nota
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtEmiss" type="Data" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Emissão da Nota
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_IdentcVeic" type="GrupoIdentcVeicComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Identificação do Veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC471_AvalstComplexType">
+        <xs:sequence>
+            <xs:element name="TpCli_Avalst" type="TpPessoaCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo de Pessoa Avalista
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJ_CPF_Avalst" type="CNPJ_CPFCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        CNPJ ou CPF do Avalista
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC471_CliPFComplexType">
+        <xs:sequence>
+            <xs:element name="NomCli" type="Nome">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nome do Cliente
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtNasc" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de Nascimento
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Sexo" type="TpSexo">
+                <xs:annotation>
+                    <xs:documentation>
+                        Sexo (F/M)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Nacnl" type="Nacnl">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nacionalidade
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpIdentc" type="TpIdentc">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo de Identificacao
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumIdentc" type="NumDocIdentc">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero de Identificacao
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtIdentc" type="Data">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data do documento de Identificacao
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="OrgaoExpddr" type="OrgaoExpddr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Orgao Expedidor
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UFOrgaoExpddr" type="UF" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        UF do Orgao Expedidor
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NomMae" type="Nome" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nome da Mãe
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="EstadoCivil" type="EstadoCivil">
+                <xs:annotation>
+                    <xs:documentation>
+                        Estado Civil do Cliente
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NomConjuge" type="Nome" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Nome do Conjuge
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CPFConjuge" type="CNPJ_CPF" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        CPF do Conjuge
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471_EndCliPF" type="Grupo_EndComplexType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Enderecos
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TelRes" type="NumTel" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Telefone Residencial
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TelComl" type="NumTel" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Telefone Comercial
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TelCel" type="NumTel" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Telefone Celular
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="EndEletrnc" type="EndEletrnc" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Email do Cliente
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PorteCli_PF" type="PorteCli" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Porte do Cliente Pessoa Fisica
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definição do ACCC471RET -->
+    <xs:complexType name="ACCC471RETComplexType">
+        <xs:sequence>
+            <xs:element name="Grupo_Gar_Acto" type="Grupo_Gar_ActoComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Contratos Aceitos
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_Gar_Recsdo" type="Grupo_Gar_RecsdoComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Contratos Recusados
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_Gar_ActoComplexType">
+        <xs:sequence>
+            <xs:element name="Grupo_ACCC471RET_GarActo" type="Grupo_ACCC471RET_GarActoComplexType"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Contratos Aceitos
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC471RET_GarActoComplexType">
+        <xs:sequence>
+            <xs:element name="IdentdPartAdmdo" type="CNPJBase">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identificador do participante administrado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumCtrlIFGar" type="ControleIFCCC">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número de controle da garantia da IF
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SitRegistro" type="SitRegistro">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situacao do Registro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_Gar_RecsdoComplexType">
+        <xs:sequence>
+            <xs:element name="Grupo_ACCC471RET_GarRecsdo" type="Grupo_ACCC471RET_GarSCRComplexType"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo de Garantias Recusados
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ACCC471RET_GarSCRComplexType">
+        <xs:sequence>
+            <xs:element name="IdentdPartAdmdo" type="CNPJBaseCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identificador do participante administrado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumCtrlIFGar" type="ControleIFCCCCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número de controle IF da garantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpGar" type="TpGarCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo da Garantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpGarSCR" type="TpGarSCRCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo da Garantia no SCR
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SubTpGarSCR" type="SubTpGarSCRCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Subtipo da Garantia no SCR
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SitGar" type="SitGarCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Situação da garantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IndrBemFincd" type="IndrCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Indicador de Bem Financiado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PercGar" type="PercentualCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Percentual de garantia
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VlrOrGar" type="ValorCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor Original da
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VlrGarDtReaval" type="ValorCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor da Garantia na Data de Reavaliação
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtReaval" type="DataCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de Reavaliação
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ClassRscCesta" type="ClassRscCestaCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Classificação de Risco Cesta
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_Veic" type="GrupoRETVeicComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_Imovel" type="GrupoRETImovelComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Imóvel
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_GarFidejussoria" type="GrupoRETGarFidejussoriaComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Garantia Fidejussória
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_Equipmnt" type="GrupoEquipmntComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Equipamentos
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_InstntoFinanc" type="GrupoRETInstntoFinancComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Instrumento Financeiro
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_Mercdria" type="GrupoRETMercdriaComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Mercadoria
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="GrupoRETVeicComplexType">
+        <xs:sequence>
+            <xs:element name="VlrEntdVeic" type="ValorCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor Entrada do Veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IdentdChassi" type="IdChassiCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identificador do chassi do veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpVeic" type="TpVeiclCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo do Veiculo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TpTabVeicl" type="TpTabVeiclCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Tipo de Tabela Veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CodTabVeicl" type="CodTabVeiclCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Código Tabela Veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UFCodTabVeicl" type="UFCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        UF Código Tabela Veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IndrVeicUsado" type="IndrCodErr">
+                <xs:annotation>
+                    <xs:documentation>
+                        Indicador de Veiculo Usado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumPlaca" type="NumPlacaVeicCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero da Placa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UFNumPlaca" type="UFCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        UF Numero da Placa
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="KM" type="QtdCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Quilometragem
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RENAVAM" type="RenavamCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Renavam
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumNota" type="NumNotaFiscalCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número da Nota
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumSerNota" type="NumSerNotaFiscal" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número de Serie da Nota
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="VlrNota" type="ValorCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor da Nota
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DtEmiss" type="DataCodErr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data Emissão da Nota
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ACCC471RET_IdentcVeic" type="GrupoIdentcVeicComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Grupo Identificação do Veículo
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+</xs:schema>
