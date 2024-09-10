@@ -66,7 +66,6 @@ func JSONToXML(jsonData []byte) ([]byte, error) {
 		return nil, fmt.Errorf("erro ao converter JSON para Map: %v", err)
 	}
 
-	// Adiciona manualmente os namespaces e a raiz do XML se não estiverem presentes
 	if _, ok := mv["ACCCDOC"]; !ok {
 		mv["ACCCDOC"] = map[string]interface{}{}
 	}

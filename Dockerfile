@@ -1,9 +1,10 @@
-FROM golang:1.22
+FROM golang:1.22-alpine
 
-RUN apt-get update && apt-get install -y \
-    libxml2 \
+RUN apk add --no-cache \
     libxml2-dev \
-    libxml2-utils
+    libxml2-utils \
+    gcc \
+    musl-dev
 
 WORKDIR /app
 
