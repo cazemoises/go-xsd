@@ -1,0 +1,9 @@
+spacy
+nltk
+pandas
+scikit-learn
+seaborn
+numpy
+tensorflow
+spellchecker
+matplotlib

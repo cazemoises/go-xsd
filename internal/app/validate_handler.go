@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 
 	"go-xsd/internal/utils"
 	validator "go-xsd/pkg/xmlvalidator"
@@ -22,23 +23,17 @@ func ValidateXMLHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	xsdPath := fmt.Sprintf("xsds/%s", xsdFile)
-	if _, err := ioutil.ReadFile(xsdPath); err != nil {
+	if _, err := os.ReadFile(xsdPath); err != nil {
 		utils.SendError(w, http.StatusNotFound, 1003, "XSD file not found")
 		return
 	}
 
-	xmlFile, _, err := r.FormFile("file")
+	xmlData, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		utils.SendError(w, http.StatusBadRequest, 1004, "Error reading file")
+		utils.SendError(w, http.StatusInternalServerError, 1005, "Error reading XML data: "+err.Error())
 		return
 	}
-	defer xmlFile.Close()
-
-	xmlData, err := ioutil.ReadAll(xmlFile)
-	if err != nil {
-		utils.SendError(w, http.StatusInternalServerError, 1005, "Error reading file data")
-		return
-	}
+	defer r.Body.Close()
 
 	err = validator.ValidateXML(xmlData, xsdPath)
 	if err != nil {
