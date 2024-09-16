@@ -1,0 +1,218 @@
+{
+  "BCARQ": {
+    "NomArq": "Exemplo",
+    "NumCtrlEmis": "12345678901234567890",
+    "NumCtrlDestOr": "",
+    "ISPBEmissor": "12345678",
+    "ISPBDestinatario": "87654321",
+    "DtHrArq": "2024-12-10T12:24:13",
+    "SitReq": 2,
+    "GrupoSeq": {
+      "XMLName": {
+        "Space": "http://www.cip-bancos.org.br/ARQ/ACCC471.xsd",
+        "Local": "Grupo_Seq"
+      },
+      "NumSeq": 1,
+      "IndrCont": "N"
+    },
+    "DtRef": "2000-01-01"
+  },
+  "SISARQ": {
+    "ACCC471": {
+      "GrupoACCC471GarSCR": [
+        {
+          "XMLName": {
+            "Space": "http://www.cip-bancos.org.br/ARQ/ACCC471.xsd",
+            "Local": "Grupo_ACCC471_GarSCR"
+          },
+          "CodErroAttr": "",
+          "IdentdPartAdmdo": "12345678",
+          "NumCtrlIFGar": "1234567890123456789012345678901234567890",
+          "TpGar": {
+            "CodErroAttr": "",
+            "Value": 1
+          },
+          "TpGarSCR": {
+            "CodErroAttr": "",
+            "Value": 1
+          },
+          "SubTpGarSCR": {
+            "CodErroAttr": "",
+            "Value": 1
+          },
+          "SitGar": "1",
+          "IndrBemFincd": {
+            "CodErroAttr": "",
+            "Value": "S"
+          },
+          "PercGar": {
+            "CodErroAttr": "",
+            "Value": 100
+          },
+          "VlrOrGar": {
+            "CodErroAttr": "",
+            "Value": 10000
+          },
+          "VlrGarDtReaval": {
+            "CodErroAttr": "",
+            "Value": 9000
+          },
+          "DtReaval": {
+            "CodErroAttr": "",
+            "Value": "2023-01-01"
+          },
+          "ClassRscCesta": "1",
+          "GrupoACCC471Veic": {
+            "XMLName": {
+              "Space": "http://www.cip-bancos.org.br/ARQ/ACCC471.xsd",
+              "Local": "Grupo_ACCC471_Veic"
+            },
+            "VlrEntdVeic": {
+              "CodErroAttr": "",
+              "Value": 5000
+            },
+            "IdentdChassi": {
+              "CodErroAttr": "",
+              "Value": "9BWZZZ377VT004251"
+            },
+            "TpVeic": 1,
+            "TpTabVeicl": "1",
+            "CodTabVeicl": "1",
+            "UFCodTabVeicl": "SP",
+            "IndrVeicUsado": "S",
+            "NumPlaca": "ABC1234",
+            "UFNumPlaca": "SP",
+            "KM": 10000,
+            "RENAVAM": "123456789",
+            "NumNota": "12345",
+            "NumSerNota": "1",
+            "VlrNota": 30000,
+            "DtEmiss": "2023-01-01",
+            "GrupoACCC471IdentcVeic": {
+              "CodErroAttr": "",
+              "VlrMercVeic": {
+                "CodErroAttr": "",
+                "Value": 25000
+              },
+              "CodCatg": {
+                "CodErroAttr": "",
+                "Value": "1"
+              },
+              "CodMarca": {
+                "CodErroAttr": "",
+                "Value": "1"
+              },
+              "CodModl": {
+                "CodErroAttr": "",
+                "Value": "1"
+              },
+              "AnoModlVeicl": {
+                "CodErroAttr": "",
+                "Value": "2022"
+              },
+              "AnoFabrccVeicl": {
+                "CodErroAttr": "",
+                "Value": "2001"
+              },
+              "TpCombtvl": null,
+              "PaisFabrcc": null
+            }
+          },
+          "GrupoACCC471Imovel": {
+            "XMLName": {
+              "Space": "http://www.cip-bancos.org.br/ARQ/ACCC471.xsd",
+              "Local": "Grupo_ACCC471_Imovel"
+            },
+            "TpImovl": "1",
+            "TpUsoImovl": "1",
+            "NumInscrMuncplImovl": "12345678",
+            "NumMatriclImovl": "123456",
+            "IdCartrio": "1234",
+            "GrupoACCC471EndImovel": {
+              "CodErroAttr": "",
+              "TpEndImovl": {
+                "CodErroAttr": "",
+                "Value": "1"
+              },
+              "EndImovl": {
+                "CodErroAttr": "",
+                "Value": "Rua Exemplo, 123"
+              },
+              "CEPImovl": {
+                "CodErroAttr": "",
+                "Value": "12345678"
+              },
+              "CidImovl": {
+                "CodErroAttr": "",
+                "Value": "São Paulo"
+              },
+              "UFImovl": {
+                "CodErroAttr": "",
+                "Value": "SP"
+              },
+              "PaisImovl": {
+                "CodErroAttr": "",
+                "Value": "Brasil"
+              }
+            }
+          },
+          "GrupoACCC471GarFidejussoria": {
+            "XMLName": {
+              "Space": "http://www.cip-bancos.org.br/ARQ/ACCC471.xsd",
+              "Local": "Grupo_ACCC471_GarFidejussoria"
+            },
+            "SeqGarFidjssria": 1,
+            "TpPessoaGarFidjssria": "1",
+            "CNPJCPFPessoaGarFidjssria": "12345678901",
+            "GrupoACCC471GarFidjssriaPF": {
+              "XMLName": {
+                "Space": "http://www.cip-bancos.org.br/ARQ/ACCC471.xsd",
+                "Local": "Grupo_ACCC471_GarFidjssriaPF"
+              },
+              "CodErroAttr": "",
+              "NomPessoaGarFidjssria": {
+                "CodErroAttr": "",
+                "Value": "Fulano de Tal"
+              },
+              "NomMae": {
+                "CodErroAttr": "",
+                "Value": "Maria"
+              },
+              "EstadoCivil": {
+                "CodErroAttr": "",
+                "Value": "SL"
+              },
+              "CPFConjuge": {
+                "CodErroAttr": "",
+                "Value": "12345678901"
+              },
+              "NomConjuge": {
+                "CodErroAttr": "",
+                "Value": "Beltrano"
+              },
+              "PortePessoaGarFidjssriaPF": {
+                "CodErroAttr": "",
+                "Value": 1
+              },
+              "TpIdentc": {
+                "CodErroAttr": "",
+                "Value": "12"
+              },
+              "NumIdentc": {
+                "CodErroAttr": "",
+                "Value": "12345678"
+              }
+            },
+            "GrupoACCC471GarFidjssriaPJ": null,
+            "GrupoACCC471EndGarFidjssria": null
+          },
+          "GrupoACCC471Equipmnt": null,
+          "GrupoACCC471InstntoFinanc": null,
+          "GrupoACCC471Mercdria": null
+        }
+      ]
+    },
+    "ACCC471RET": null
+  },
+  "ESTARQ": ""
+}
